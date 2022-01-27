@@ -19,16 +19,34 @@ Solo letras minusculas
 No se permite acentuación de palabras   
 */
 
-let inputUsuario = document.querySelector("#input-texto");
 let botonEncriptar = document.querySelector("#btn-encriptar");
 let botonDesencriptar = document.querySelector("#btn-desencriptar");
-let resultadoEncriptado = document.querySelector("#msg");
+let inputUsuario = document.querySelector("#input-texto");
+let respuestaEncriptada = document.querySelector("#msg");
+let botonCopiar = document.querySelector("#btn-copy");
 
-
-botonEncriptar.addEventListener("click", function(event) {
-    event.preventDefault();
-    resultadoEncriptado.value = inputUsuario.value;
+botonEncriptar.addEventListener("click", function() {
+    let encriptado = encriptar(inputUsuario.value);
+    respuestaEncriptada.value = encriptado;
 });
 
+function encriptar(texto) {
+    let resultado = texto.replaceAll("e", "hola");
+    resultado = resultado.replaceAll("i", "chao");
+    return resultado;
+}
 
-// inputUsuario.addEventListener("input", () => console.log(inputUsuario.value));
+botonDesencriptar.addEventListener("click", function() {
+    let desencriptado = desencriptar(inputUsuario.value);
+    respuestaEncriptada.value = desencriptado;
+});
+
+function desencriptar(texto) {
+    let resultado = texto.replaceAll("hola", "e");
+    resultado = resultado.replaceAll("chao", "i")
+    return resultado;
+}
+
+botonCopiar.addEventListener("click", function(){
+    navigator.clipboard.writeText(respuestaEncriptada.value);
+});
